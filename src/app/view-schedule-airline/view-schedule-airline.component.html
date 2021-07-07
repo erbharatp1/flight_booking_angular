@@ -1,0 +1,43 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 d-flex justify-content-between">
+      <div class="searchForm feb-form">
+        <input class="form-control mr-sm-2" type="text" [(ngModel)]="userFilter.sourceAirport" placeholder="Search"
+          aria-label="Search">
+        <span class="ficon-search-icon-01"></span>
+      </div>
+      <button type="button" class="btn btn-success" (click)="addScheduledFlight()"> Create Schedule
+      </button>
+    </div>
+    <div class="col-md-12">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Flight Id</th>
+            <th scope="col">Arrival</th>
+            <th scope="col">Departure</th>
+            <th scope="col">Source</th>
+            <th scope="col">Destination</th>
+            <th scope="col">Available Seat</th>
+            <th scope="col">Action</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let scheduled of scheduledList | filterBy: userFilter ; index as i">
+            <th scope="row">{{ scheduled.flightId }}</th>
+            <td>{{ scheduled.arrival}} </td>
+            <td>{{ scheduled.departure }}</td>
+            <td>{{ scheduled.sourceAirport }}</td>
+            <td>{{ scheduled.destination }}</td>
+            <td>{{ scheduled.availableSeats }}</td>
+            <button type="submit" class="btn btn-success" (click)="goEdit(scheduled.scheduleFlightId)">Edit</button>
+            &nbsp; &nbsp; &nbsp;
+            <button type="submit" class="btn btn-danger" (click)="delete(scheduled.scheduleFlightId)">Delete</button>
+            &nbsp; &nbsp; &nbsp;
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

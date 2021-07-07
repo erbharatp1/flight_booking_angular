@@ -1,0 +1,53 @@
+<h3 style="text-align: center;">Add Flight</h3>
+<div [hidden]="submitted" style="width: 400px; margin-left: auto; margin-right: auto;">
+  <form [formGroup]="flightForm" (submit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="name">Airline Number</label>
+      <input type="text" maxlength="10" placeholder="Flight Number" formControlName="flightNo" name="flightNo">
+    </div>
+    <div *ngIf="f.flightNo.touched && f.flightNo.invalid" class="alert alert-danger">
+      <div *ngIf="f.flightNo.errors.required">Airline Number is required.</div>
+    </div>
+    <div class="form-group">
+      <label for="name">Carrier Name</label>
+      <input type="text" maxlength="20" placeholder="Carrier Name" class="form-control" id="carrierName"
+        formControlName="carrierName" name="carrierName">
+    </div>
+    <div *ngIf="f.flightNo.touched && f.flightNo.invalid" class="alert alert-danger">
+      <div *ngIf="f.flightNo.errors.required">Carrier Name is required.</div>
+    </div>
+    <div class="form-group">
+      <label for="name">Airline Model</label>
+      <input type="text" placeholder="Flight Model" maxlength="10" class="form-control" id="flightModel"
+        formControlName="flightModel" name="flightModel">
+    </div>
+    <div *ngIf="f.flightModel.touched && f.flightModel.invalid" class="alert alert-danger">
+      <div *ngIf="f.flightModel.errors.required">Model is required.</div>
+    </div>
+
+    <div class="form-group">
+      <label for="name">Price</label>
+      <input type="text" placeholder="2500" maxlength="5" class="form-control" id="price" formControlName="price"
+        name="price">
+    </div>
+    <div *ngIf="f.price.touched && f.price.invalid" class="alert alert-danger">
+      <div *ngIf="f.price.errors.required">Price is required.</div>
+    </div>
+
+    <div class="form-group">
+      <label for="name">Seat Capacity</label>
+      <input type="text" placeholder="100" maxlength="4" class="form-control" id="seatCapacity"
+        formControlName="seatCapacity" name="seatCapacity">
+    </div>
+    <div *ngIf="f.seatCapacity.touched && f.seatCapacity.invalid" class="alert alert-danger">
+      <div *ngIf="f.seatCapacity.errors.required">Capacity is required.</div>
+    </div>
+    <button type="submit" class="btn btn-success" [disabled]="!flightForm.valid">Submit</button>
+  </form>
+</div>
+
+<div [hidden]="!submitted">
+  <h4>You submitted successfully!</h4>
+  <!--<button class="btn btn-success" (click)="newFlight()">Add</button>-->
+</div>

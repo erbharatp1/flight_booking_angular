@@ -1,0 +1,36 @@
+<h4 class="text-align:center,align-items-center">History</h4>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">PNR No</th>
+            <th scope="col">From</th>
+            <th scope="col">To</th>
+            <th scope="col">Trip</th>
+            <th scope="col">No of Passengers</th>
+            <th scope="col">Price</th>
+            <th scope="col">Action</th>
+            <!-- <th scope="col">Download</th>
+            <th scope="col">Cancel</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let booking of bookingList; index as i">
+            <th scope="row">{{ booking.pnrNo }}</th>
+            <td>{{ booking.origin}}</td>
+            <td>{{ booking.destination }}</td>
+            <td>{{ booking.trip}}</td>
+            <td>{{ booking.noOfPassengers}}</td>
+            <td>{{ booking.price }}</td>
+            <button type="submit" class="btn btn-success" (click)="viewBooking(booking.bookingId)">View</button> &nbsp; &nbsp;
+            &nbsp;
+            <button type="submit" class="btn btn-success" hidden>Download</button> 
+            <button type="submit" class="btn btn-danger" (click)="deleteById(booking.bookingId)">Cancel</button>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

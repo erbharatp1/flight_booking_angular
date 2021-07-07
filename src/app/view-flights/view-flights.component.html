@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 d-flex justify-content-between">
+      <h4>Flight List</h4>
+      <button type="button" class="btn btn-success" (click)="addFlight()">Create Flight</button>
+    </div>
+    <div class="col-md-12">
+      <!-- <div class="searchForm feb-form">
+        <input type="text" [(ngModel)]="userFilter.carrierName" placeholder="Carrier">
+        <span class="ficon-search-icon-01"></span>
+      </div> -->
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Flight No</th>
+            <th scope="col">Carrier Name</th>
+            <th scope="col">Flight Model</th>
+            <th scope="col">Capacity</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- <tr *ngFor="let flight of flightList "> -->
+          <tr *ngFor="let flight of flightList ; index as i">
+            <th scope="row">{{ flight.id }}</th>
+            <td>{{ flight.carrierName }}</td>
+            <td>{{ flight.flightModel }}</td>
+            <td>{{ flight.seatCapacity }}</td>
+            <button type="submit" class="btn btn-success" (click)="goEdit(flight.id)">Edit</button> &nbsp; &nbsp; &nbsp;
+            <button type="submit" class="btn btn-success" *ngIf="flight.activeStatus==='DE'"
+              (click)="updateFlight(flight.id)">UnBlock</button> &nbsp; &nbsp;
+            &nbsp;
+            <button type="submit" class="btn btn-danger" *ngIf="flight.activeStatus==='AC'"
+              (click)="updateFlightBlock(flight.id)">Block</button> &nbsp; &nbsp;
+            &nbsp;
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

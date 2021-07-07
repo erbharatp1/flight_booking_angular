@@ -1,0 +1,86 @@
+<div class="wrapper">
+  <div class="row">
+    <div class="card col-md-4 offset-md-4 shadow-lg p-3 mb-5 bg-white">
+      <h3 style="margin-top: 20px; font-size: x-large;">Create Schedule</h3>
+      <form [formGroup]="scheduledForm" (submit)="OnSubmit()">
+
+        <div class="row">
+          Flight Id :
+          <select class="form-control" formControlName="flightId">
+            <option [ngValue]="null" selected>Select</option>
+            <option *ngFor="let flight of flightList" [value]="flight.id">{{flight.id}} {{flight.carrierName}}</option>
+          </select>
+        </div>
+        <div *ngIf="f.flightId.touched && f.flightId.invalid" class="alert alert-danger">
+          <div *ngIf="f.flightId.errors.required">Flight Id is required.</div>
+        </div>
+        <div class="row">
+          Source : <select class="form-control" formControlName="sourceAirport">
+            <option [ngValue]="null" selected>Select</option>
+            <option *ngFor="let airport of locationList" [value]="airport.cityName">
+              {{airport.cityName}}
+            </option>
+          </select>
+          <!-- Source : <input class="form-control" type="text" formControlName="sourceAirport"> -->
+        </div>
+        <div *ngIf="f.sourceAirport.touched && f.sourceAirport.invalid" class="alert alert-danger">
+          <div *ngIf="f.sourceAirport.errors.required">Source is required.</div>
+        </div>
+        <div class="row">
+          Destination : 
+          <select class="form-control" formControlName="destination">
+            <option [ngValue]="null" selected>Select</option>
+            <ng-container *ngFor="let airport of locationList">
+              <option *ngIf="scheduledForm.controls['sourceAirport'].value!=airport.cityName" [value]="airport.cityName">
+                {{airport.cityName}}
+              </option>
+            </ng-container>
+          </select>
+          <!-- <input class="form-control" type="text" formControlName="destination"> -->
+        </div>
+        <div *ngIf="f.destination.touched && f.destination.invalid" class="alert alert-danger">
+          <div *ngIf="f.destination.errors.required">Destination is required.</div>
+        </div>
+        <div class="row">
+          Departure Date : <input class="form-control" type="date" formControlName="departure">
+        </div>
+        <div *ngIf="f.departure.touched && f.departure.invalid" class="alert alert-danger">
+          <div *ngIf="f.departure.errors.required">Departure is required.</div>
+        </div>
+        <div class="row">
+          Departure Time : <input class="form-control" type="time" formControlName="departureTime">
+        </div>
+        <div *ngIf="f.departureTime.touched && f.departureTime.invalid" class="alert alert-danger">
+          <div *ngIf="f.departureTime.errors.required">Departure Time is required.</div>
+        </div>
+
+        <div class="row">
+          Arrival Date : <input class="form-control" type="date" formControlName="arrival">
+        </div>
+        <div *ngIf="f.arrival.touched && f.arrival.invalid" class="alert alert-danger">
+          <div *ngIf="f.arrival.errors.required">Arrival is required.</div>
+        </div>
+        <div class="row">
+          Arrival Time : <input class="form-control" type="time" formControlName="arrivalTime">
+        </div>
+        <div *ngIf="f.arrivalTime.touched && f.arrivalTime.invalid" class="alert alert-danger">
+          <div *ngIf="f.arrivalTime.errors.required">Arrival Time is required.</div>
+        </div>
+
+        <div class="row">
+          Available Seats : <input class="form-control" type="number" formControlName="availableSeats">
+        </div>
+        <div *ngIf="f.availableSeats.touched && f.availableSeats.invalid" class="alert alert-danger">
+          <div *ngIf="f.availableSeats.errors.required">Available Seats is required.</div>
+
+        </div>
+        <div class="row">
+          <button class="regBtn btn btn-success" type="submit" [disabled]="!scheduledForm.valid">
+            Submit
+          </button>&nbsp;
+          <button class="btn btn-danger" (click)="backBtn()">Not Now</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

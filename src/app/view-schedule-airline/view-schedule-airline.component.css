@@ -1,0 +1,8 @@
+.searchForm span.ficon-search-icon-01 {
+    position: absolute;
+    top: 7px;
+    font-size: 22px;
+    color: #A8AFBB;
+    left: 10px;
+    cursor: pointer;
+}

@@ -1,0 +1,175 @@
+<h3 style="text-align: center;">Booking Counnter</h3>
+<div [hidden]="submitted">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12" style="padding: 2rem 20rem;">
+        <form [formGroup]="bookingForm" (submit)="onBooking()" style="border: 1px solid; padding: 2rem;">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="" class="fontF-Regular Text-off">From</label>
+                <select class="form-control" formControlName="origin">
+                  <option [ngValue]="null" selected>Select</option>
+                  <option *ngFor="let airport of locationList" [value]="airport.cityName">
+                    {{airport.cityName}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="" class="fontF-Regular Text-off">TO</label>
+                <select class="form-control" formControlName="destination">
+                  <option [ngValue]="null" selected>Select</option>
+                  <ng-container *ngFor="let airport of locationList">
+                    <option *ngIf="bookingForm.controls['origin'].value!=airport.cityName" [value]="airport.cityName">
+                      {{airport.cityName}}
+                    </option>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" #OT name="definePayrollPeriod"
+                    (change)="onChangeTrip($event)" id="OT" value="OT">
+                  <label for="OT" class="form-check-label" for="flexRadioDefault1">One Trip</label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="definePayrollPeriod"
+                    (change)="onChangeTrip($event)" id="RT" value="RT">
+                  <label for="RT" class="form-check-label" for="flexRadioDefault1">Round Trip</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div [ngClass]="interviewType=='RT' ? 'col-md-6' : 'col-md-12'"
+              [ngStyle]="{'border-right': interviewType=='RT' ? '1px solid' : 'none'}">
+              <div class="form-group">
+                <label for="name">Onword Journey </label>
+                <input type="date" class="form-control" id="bookingDateFrom" formControlName="journeyFromDate"
+                  (change)="onChangeDesirable()" name="bookingDateFrom">
+              </div>
+              <ng-container *ngFor="let item of flightList; let i=index;">
+                <div class="w-100 mb-2 p-2 d-flex" style="color: white; cursor: pointer;" #flightOneTrip
+                  (click)="getFlight(item, i,'OT')">
+                  <span>{{item.carrierName}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Price Rs. {{item.price}} </span>
+                  &nbsp;&nbsp;<span>Departure Date {{item.departure}} </span>
+                  &nbsp;&nbsp;<span>Departure Time {{item.departureTime}} </span>
+                </div>
+              </ng-container>
+            </div>
+            <div class="col-md-6" *ngIf="interviewType=='RT'">
+              <div class="form-group">
+                <label for="name">Return Journey</label>
+                <input type="date" class="form-control" id="bookingDateTo" formControlName="journeyToDate"
+                  name="bookingDateTo">
+              </div>
+              <ng-container *ngFor="let item of flightList; let i=index; ">
+                <div class="w-100 mb-2 p-2 d-flex" style="color: white; cursor: pointer;" #flightRoundTrip
+                  (click)="getFlight(item, i,'RT')">
+                  <span>{{item.carrierName}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>Price Rs. {{item.price}}</span>
+                  &nbsp;&nbsp;<span>Departure Date {{item.departure}} </span>
+                  &nbsp;&nbsp;<span>Departure Time {{item.departureTime}} </span>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label for="" class="fontF-Regular Text-off">Meal Preference</label>
+              <select class="form-control" formControlName="mealOnePreference">
+                <!-- <option  [ngValue]="null" selected>Select</option>  -->
+                <option value="None">None</option>
+                <option value="Veg">Veg</option>
+                <option value="Non-Veg">Non-Veg</option>
+              </select>
+            </div>
+            <div class="col-md-6" *ngIf="interviewType=='RT'">
+              <div class="form-group">
+                <label for="" class="fontF-Regular Text-off">Meal Preference</label>
+                <select class="form-control" formControlName="mealRoundPreference">
+                  <!-- <option  [ngValue]="null" selected>Select</option>  -->
+                  <option value="None">None</option>
+                  <option value="Veg">Veg</option>
+                  <option value="Non-Veg">Non-Veg</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">No of Passengers</label>
+                <input type="text" class="form-control" maxlength="1" id="noOfPassengers"
+                  formControlName="noOfPassengers" (change)="addRow($event)" name="noOfPassengers">
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label>Total Price</label>
+              <input type="number" class="form-control" readonly formControlName="price">
+              <br>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="" class="fontF-Regular Text-off">Discount</label>
+                <select class="form-control" formControlName="discount">
+                  <option [ngValue]="null" selected>Select</option>
+                  <option *ngFor="let discount of discountList;" [value]="discount.price">{{discount.disCode}}
+                  </option>
+
+                </select>
+              </div>
+            </div>
+            <div class="table-responsive-auto">
+              <div class="table-scroll-light">
+                <table class="table table-hover feb-table fab-table-small exemTable">
+
+                  <tbody formArrayName="new_passengerXRef">
+                    <tr role="row"
+                      *ngFor="let ecCsubcat of bookingForm.get('new_passengerXRef')['controls']; let i=index"
+                      [formGroupName]="i">
+
+                      <td class="addduestionstemp-inputarea p-t-15" class="form-group">
+                        <label for="">Name</label>
+                        <input type="text" maxlength="50" class="form-control" formControlName="firstName"
+                          placeholder="John">
+                      </td>
+                      <td class="addduestionstemp-inputarea p-t-15" class="form-group">
+                        <label for="">Email </label>
+                        <input type="text" maxlength="50" class="form-control" formControlName="emailId">
+                      </td>
+                      <td class="addduestionstemp-inputarea p-t-15" class="form-group">
+                        <label>Gender</label>
+                        <select class="form-control" formControlName="gender">
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                        </select>
+                      </td>
+                      <td class="addduestionstemp-inputarea p-t-15" class="form-group">
+                        <label for="">Age </label>
+                        <input type="text" class="form-control" formControlName="age" maxlength="100">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div>
+            <button type="submit" class="btn btn-success">Continue</button>
+            <button class="btn btn-danger ml-4" (click)="backBtn()">Not Now</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

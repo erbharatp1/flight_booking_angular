@@ -1,0 +1,21 @@
+  #box{
+      width: 100%;
+      height: 50%;
+    }
+    #opacity-3 {
+    opacity:0.6!important;
+  }
+ 
+
+.custom-bg {
+  background-color: #20344887;
+}
+
+.btn-align {
+  margin-bottom: 10px;
+}
+
+.btn-align:hover {
+  background-color: #4ad08c85;
+  color: white;
+}

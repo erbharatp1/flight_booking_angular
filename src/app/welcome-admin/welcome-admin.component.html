@@ -1,0 +1,70 @@
+<div class="view" style="  background-repeat: no-repeat; background-size: cover; background-position: center center;">
+  <nav class="navbar navbar-dark ">
+    <div class="navbar-brand">
+
+      <b>Flight Reservation System</b>
+    </div>
+    <!-- <button type="button" class="btn btn-danger pull-right" (click)="logout()">LOGOUT</button> -->
+  </nav>
+  <div style="padding: 50px;" class="d-flex align-items-center justify-content-center">
+    <div class="shadow-lg p-3 mb-5 rounded custom-bg" id="box" style="opacity: 1;">
+      <div class="container">
+        <div class="row justify-content-center">
+          <h2 class="font-weight-bold" style="color: white">Welcome Admin!!</h2>
+        </div>
+      </div><br>
+      <div class="container">
+        <div class="content-center">
+          <div class="d-flex justify-content-between" style="flex-wrap:wrap;">
+            <button type="button" class="btn btn-light btn-align" (click)="viewFlight()">Manage Flight</button>
+            
+            <button type="button" class="btn btn-light btn-align" (click)="viewSchedule()">Manage Scheduled
+              Flight</button>
+            <button type="button" class="btn btn-light btn-align" (click)="viewDiscount()">Manage Discounts</button>
+           
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add A Flight</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <form>
+    <div class="row">
+      <div class="card col-md-4 offset-md-4 shadow-lg p-3 mb-5 bg-white">
+
+
+        <div class="row">
+          User Name : <input class="form-control" type="text" name="username">
+          <small style="color: red;">Invalid User Name</small>
+        </div>
+        <div class="row">
+          Password : <input class="form-control" type="password" name="password" minlength="5" maxlength="50" required>
+        </div>
+        <div class="row">
+          Phone No : <input class="form-control" type="number" name="phone">
+          <small style="color: red;">Invalid Phone Number</small>
+        </div>
+        <div class="row">
+          Email : <input class="form-control" type="email" name="email">
+          <small style="color: red;">Invalid Email</small>
+        </div>
+
+      </div>
+    </div>
+  </form>
+
+  <!-- <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div> -->
+</ng-template>

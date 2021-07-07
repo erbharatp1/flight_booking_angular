@@ -1,0 +1,26 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Code</th>
+                  <th scope="col">Location</th>
+                  
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let airport of airportList; index as i">
+                  <th scope="row">{{ airport.airportName }}</th>
+                  <td>
+                    {{ airport.airportCode }}
+                  </td>
+                  <td>{{ airport.airportLocation }}</td>
+                  
+                </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+  </div>
